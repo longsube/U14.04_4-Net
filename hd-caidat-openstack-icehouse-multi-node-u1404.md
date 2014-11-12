@@ -64,7 +64,7 @@ Sau khi thực hiện script trên, máy Controller sẽ khởi động lại v�
 </table>
 -->
 #### C.2. Cài đặt các gói MYSQL, NTP cho Controller Node
-Đăng nhập vào Controller bằng địa chỉ <b>CON_EXT_IP</b> khai báo trong file <b><i>config.cfg</i></b> là 192.168.1.71 bằng tài khoản root.
+Đăng nhập vào Controller bằng địa chỉ <b>CON_MNGT_IP</b> khai báo trong file <b><i>config.cfg</i></b> là 10.145.37.226 bằng tài khoản root.
 Sau đó di chuyển vào thư mục script-ubuntu1204 bằng lệnh cd và thực thi bằng lệnh bash
 
     cd script-U1404-4net
@@ -302,19 +302,11 @@ Kết thúc bước cài đặt trên COMPUTE NODE, chuyển về CONTROLLER NOD
 
 Sau khi thực hiện xong việc cài đặt HORIZON, màn hình sẽ trả về IP ADD, User và Password để đăng nhập vào horizon    
     
-#### G.2. Tạo PUBLIC NET, PRIVATE NET, ROUTER
-Tạo các policy để cho phép các máy ở ngoài có thể truy cập vào máy ảo (Instance) qua IP PUBLIC được floating.
-Thực hiện script dưới để tạo các loại network cho OpenStack
-Tạo router, gán subnet cho router, gán gateway cho router
-Khởi tạo một máy ảo với image là cirros để test
-
-    bash creat-network.sh
-
 #### Khởi động lại các node
 Khởi động lần lượt các node
 - CONTROLLER 
 - NETWORK NODE 
 - COMPUTE NODE 
-Và đăng nhập vào HORIZON ở bước F.1 và sử dụng OpenStack
+Và đăng nhập vào HORIZON ở bước G.1 và sử dụng OpenStack
 
 ### KẾT THÚC - CHÚC VUI !
