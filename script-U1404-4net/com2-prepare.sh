@@ -144,6 +144,39 @@ EOF
 # Xoa file sql mac dinh
 rm /var/lib/nova/nova.sqlite
 
+#Cau hinh mount thu muc /var/lib/nova/instances va _base
+#echo o; echo n; echo p; echo 1; echo ; echo; echo w) | sudo fdisk /dev/$INS
+#echo "/dev/$INS1 /mnt/iscsi ext4 _netdev 0 0" >> /etc/fstab
+
+
+
+
+# Cau hinh Live Migration
+echo 'listen_tls = 0' >> /etc/libvirt/libvirtd.conf
+echo 'listen_tcp = 1' >> /etc/libvirt/libvirtd.conf
+echo 'auth_tcp = "none"' >> /etc/libvirt/libvirtd.conf
+
+sed -i 's/env libvirtd_opts="-d"/env libvirtd_opts="-d -l"' /etc/init/libvirt-bin.conf
+
+sed -i 's/libvirtd_opts="-d"/libvirtd_opts="-d -l"' /etc/default/libvirt-bin
+
+stop libvirt-bin && start libvirt-bin
+
+
+filenova=/etc/nova/nova.conf
+
+cat << EOF >> $filenova
+live_migration_bandwidth=0
+live_migration_flag=VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_LIVE
+live_migration_retry_count=60
+live_migration_uri=qemu+tcp://%s/system
+
+EOF
+
+
+service nova-compute restart
+
+
 
 # fix loi libvirtError: internal error: no supported architecture for os type 'hvm'
 echo 'kvm_intel' >> /etc/modules
