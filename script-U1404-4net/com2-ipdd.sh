@@ -20,25 +20,19 @@ auto lo
 iface lo inet loopback
 
 # MGNT NETWORK
-auto eth0
-iface eth0 inet static
+auto eth1
+iface eth1 inet static
 address $COM2_MGNT_IP
 netmask $NETMASK_ADD
 
 
-# EXT NETWORK
-auto eth1
-iface eth1 inet static
-address $COM2_EXT_IP
+# DATA NETWORK
+auto eth0
+iface eth0 inet static
+address $COM2_DATA_VM_IP
 netmask $NETMASK_ADD
 gateway $GATEWAY_IP
 dns-nameservers 8.8.8.8
-
-# DATA NETWORK
-auto eth2
-iface eth2 inet static
-address $COM2_DATA_VM_IP
-netmask $NETMASK_ADD
 
 EOF
 
@@ -48,7 +42,6 @@ EOF
 #service networking restart
 # ifdown eth0 && ifup eth0
 # ifdown eth1 && ifup eth1
-# ifdown eth2 && ifup eth2
 
 #sleep 5
 

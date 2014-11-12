@@ -23,8 +23,8 @@ auto lo
 iface lo inet loopback
 
 # NIC MGNT
-auto eth0
-iface eth0 inet static
+auto eth2
+iface eth2 inet static
 address $NET_MGNT_IP
 netmask $NETMASK_ADD_VM
 
@@ -33,20 +33,20 @@ auto br-ex
 iface br-ex inet static
 address $NET_EXT_IP
 netmask $NETMASK_ADD
-gateway $GATEWAY_IP
+gateway $GATEWAY_NET
 dns-nameservers 8.8.8.8
 
 # NIC External
-auto eth1
-iface eth1 inet manual
+auto eth0
+iface eth0 inet manual
    up ifconfig \$IFACE 0.0.0.0 up
    up ip link set \$IFACE promisc on
    down ip link set \$IFACE promisc off
    down ifconfig \$IFACE down
 
 # NIC DATA VM
-auto eth2
-iface eth2 inet static
+auto eth1
+iface eth1 inet static
 address $NET_DATA_VM_IP
 netmask $NETMASK_ADD
 EOF

@@ -2,7 +2,7 @@
 
 ### A. Mô hình LAB
 
-![Alt text](http://i.imgur.com/lYXMceN.jpg)
+![Alt text](http://i.imgur.com/BVp7qOQ.jpg)
 
 
 ### B. Các bước thực hiện chung

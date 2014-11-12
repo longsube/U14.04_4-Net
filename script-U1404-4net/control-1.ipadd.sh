@@ -17,15 +17,16 @@ auto eth0
 iface eth0 inet static
 address $CON_MGNT_IP
 netmask $NETMASK_ADD_VM
+gateway $GATEWAY_IP
+dns-nameservers 8.8.8.8
 
 
-# EXT NETWORK
+# PORTAL NETWORK
 auto eth1
 iface eth1 inet static
 address $CON_EXT_IP
 netmask $NETMASK_ADD
-gateway $GATEWAY_IP
-dns-nameservers 8.8.8.8
+
 EOF
 
 
