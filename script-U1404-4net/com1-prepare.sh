@@ -123,6 +123,15 @@ vncserver_proxyclient_address = $COM1_MGNT_IP
 novncproxy_base_url = http://$NET_EXT_IP:6080/vnc_auto.html
 glance_host = controller
 
+
+# Dat Quota cho Project
+quota_instances=9999
+quota_volumes=9999
+quota_injected_files=9999
+quota_cores=9999
+
+
+
 # Cho phep chen password khi khoi tao
 libvirt_inject_password = True
 libvirt_inject_partition = -1

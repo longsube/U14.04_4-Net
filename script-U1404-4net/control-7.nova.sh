@@ -38,6 +38,12 @@ volumes_path=/var/lib/nova/volumes
 enabled_apis=ec2,osapi_compute,metadata
 auth_strategy = keystone
 
+# Dat Quota cho Project
+quota_instances=9999
+quota_volumes=9999
+quota_injected_files=9999
+quota_cores=9999
+
 # Khai bao cho RABBITMQ
 rpc_backend = rabbit
 rabbit_host = controller
