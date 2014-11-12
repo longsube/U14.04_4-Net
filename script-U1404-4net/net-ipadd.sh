@@ -10,7 +10,7 @@ echo "########## Cau hinh br-int va br-ex cho OpenvSwitch ##########"
 sleep 5
 ovs-vsctl add-br br-int
 ovs-vsctl add-br br-ex
-ovs-vsctl add-port br-ex eth1
+ovs-vsctl add-port br-ex eth0
 
 echo "########## Cau hinh dia chi IP cho br-ex ##########"
 

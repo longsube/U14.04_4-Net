@@ -24,15 +24,15 @@ auto eth1
 iface eth1 inet static
 address $COM2_MGNT_IP
 netmask $NETMASK_ADD
-
+gateway $GATEWAY_IP
+dns-nameservers 8.8.8.8
 
 # DATA NETWORK
 auto eth0
 iface eth0 inet static
 address $COM2_DATA_VM_IP
 netmask $NETMASK_ADD
-gateway $GATEWAY_IP
-dns-nameservers 8.8.8.8
+
 
 EOF
 
