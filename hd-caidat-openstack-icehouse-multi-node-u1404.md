@@ -24,7 +24,7 @@ chmod +x *.sh
 ```
 #### B.2. Sửa file khai báo các thông số trước khi thực thi shell
 Trước lúc chỉnh sửa, KHÔNG cần gán IP tĩnh cho các NICs trên từng máy chủ.
-Dùng vi để sửa file config.cfg nằm trong thư mục script-U1404-3net với các IP theo ý bạn hoặc giữ nguyên các IP và đảm bảo chúng chưa được gán cho máy nào trong mạng của bạn.
+Dùng vi để sửa file config.cfg nằm trong thư mục script-U1404-4net với các IP theo ý bạn hoặc giữ nguyên các IP và đảm bảo chúng chưa được gán cho máy nào trong mạng của bạn.
 
 ### C. Thực hiện trên CONTROLLER NODE
 #### C.1. Thực thi script thiết lập IP, hostname ...
@@ -65,7 +65,7 @@ Sau khi thực hiện script trên, máy Controller sẽ khởi động lại v�
 -->
 #### C.2. Cài đặt các gói MYSQL, NTP cho Controller Node
 Đăng nhập vào Controller bằng địa chỉ <b>CON_MNGT_IP</b> khai báo trong file <b><i>config.cfg</i></b> là 10.145.37.226 bằng tài khoản root.
-Sau đó di chuyển vào thư mục script-ubuntu1204 bằng lệnh cd và thực thi bằng lệnh bash
+Sau đó di chuyển vào thư mục script-U1404-4net bằng lệnh cd và thực thi bằng lệnh bash
 
     cd script-U1404-4net
     bash control-2.prepare.sh
