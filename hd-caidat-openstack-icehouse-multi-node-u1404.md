@@ -209,7 +209,7 @@ Kết thúc cài đặt trên NETWORK NODE và chuyển sang cài đặt COMPUTE
 
 ### E. CÀI ĐẶT TRÊN COMPUTE NODE (COMPUTE1)
 Lưu ý: Cần thực hiện bước tải script từ github về như hướng dẫn ở bước B.1 và B.2 (nếu có thay đổi IP)
-Thực hiện các shell dưới để thiết lập hostname, gán ip và cài đặt các thành phần của nove trên máy COMPUTE NODE
+Thực hiện các shell dưới để thiết lập hostname, gán ip và cài đặt các thành phần của nove trên máy COMPUTE NODE 1
 - Tải các gói cần thiết 
 ```sh
 apt-get update
@@ -229,53 +229,10 @@ chmod +x *.sh
 
     bash com1-ipdd.sh
 
-Sau khi thực hiện xong shell trên các NICs của COMPUTE NODE sẽ như sau: (giống với khai báo trong file 
-
-<!--
-<b><i>config.cfg</i></b>)
-
-<table>
-  <tr>
-    <th>Hostname</th>
-    <th>NICs</th>
-    <th>IP ADDRESS</th>
-    <th>SUBNET MASK</th>
-    <th>GATEWAY</th>
-    <th>DNS</th>
-    <th>NOTE</th>
-  </tr>
-  <tr>
-    <td rowspan="3">compute1</td>
-    <td>eth0</td>
-    <td>10.10.10.73</td>
-    <td>255.255.255.0</td>
-    <td>Để trống</td>
-    <td>Để trống</td>
-    <td>Chế độ VMNET2</td>
-  </tr>
-  <tr>
-    <td>br-ex</td>
-    <td>192.168.1.73</td>
-    <td>255.255.255.0</td>
-    <td>192.168.1.1</td>
-    <td>8.8.8.8</td>
-    <td>Chế độ bridge</td>
-  </tr>
-  <tr>
-    <td>eth2</td>
-    <td>10.10.20.73</td>
-    <td>255.255.255.0</td>
-    <td>Để trống</td>
-    <td>Để trống</td>
-    <td>Chế độ VMNET3</td>
-  </tr>
-</table>
--->
-
 COMPUTE node sẽ khởi động lại, cần phải đăng nhập bằng tải khoản root để thực hiện shell dưới
     
 
-#### E.2. Cài đặt các gói của NOVA cho COMPUTE NODE
+#### E.2. Cài đặt các gói của NOVA cho COMPUTE NODE 1
 
 Đăng nhập bằng tài khoản root và thực thi các lệnh dưới để tiến hành cài đặt nova
 
@@ -288,13 +245,55 @@ Chọn YES ở màn hình trên trong quá trình cài đặt
 
 ![Alt text](http://i.imgur.com/jlRegTI.png)
 
+### F. CÀI ĐẶT TRÊN COMPUTE NODE (COMPUTE2)
+Lưu ý: Cần thực hiện bước tải script từ github về như hướng dẫn ở bước B.1 và B.2 (nếu có thay đổi IP)
+Thực hiện các shell dưới để thiết lập hostname, gán ip và cài đặt các thành phần của nove trên máy COMPUTE NODE 2
+- Tải các gói cần thiết 
+```sh
+apt-get update
+
+apt-get install git -y
+
+git clone https://github.com/longsube/U14.04_4-Net
+
+mv /root/U14.04_4-Net/script-U1404-4net script-U1404-4net
+
+cd /root/script-U1404-4net
+
+chmod +x *.sh
+```
+#### F.1. Đặt hostname, IP và các gói bổ trợ
+
+
+    bash com2-ipdd.sh
+
+
+
+COMPUTE node sẽ khởi động lại, cần phải đăng nhập bằng tải khoản root để thực hiện shell dưới
+    
+
+#### F.2. Cài đặt các gói của NOVA cho COMPUTE NODE 2
+
+Đăng nhập bằng tài khoản root và thực thi các lệnh dưới để tiến hành cài đặt nova
+
+
+    cd /root/script-U1404-4net
+	
+    bash com2-prepare.sh
+
+Chọn YES ở màn hình trên trong quá trình cài đặt
+
+![Alt text](http://i.imgur.com/jlRegTI.png)
+
 Kết thúc bước cài đặt trên COMPUTE NODE, chuyển về CONTROLLER NODE.
 
 
 
-### F. CÀI HORIZON, tạo các network trên CONTROLLER NODE
 
-#### F.1. Cài đặt Horizon
+
+### G. CÀI HORIZON, tạo các network trên CONTROLLER NODE
+
+#### G.1. Cài đặt Horizon
 Đăng nhập bằng tài khoản root và đứng tại thư mục /root/script-ubuntu1204
 
     cd /root/script-U1404-4net
@@ -303,7 +302,7 @@ Kết thúc bước cài đặt trên COMPUTE NODE, chuyển về CONTROLLER NOD
 
 Sau khi thực hiện xong việc cài đặt HORIZON, màn hình sẽ trả về IP ADD, User và Password để đăng nhập vào horizon    
     
-#### F.2. Tạo PUBLIC NET, PRIVATE NET, ROUTER
+#### G.2. Tạo PUBLIC NET, PRIVATE NET, ROUTER
 Tạo các policy để cho phép các máy ở ngoài có thể truy cập vào máy ảo (Instance) qua IP PUBLIC được floating.
 Thực hiện script dưới để tạo các loại network cho OpenStack
 Tạo router, gán subnet cho router, gán gateway cho router
