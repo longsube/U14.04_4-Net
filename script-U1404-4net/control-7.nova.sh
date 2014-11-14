@@ -1,10 +1,5 @@
 #!/bin/bash -ex
 #
-# RABBIT_PASS=a
-# ADMIN_PASS=a
-# CON_IP_MGNT=10.10.10.71
-# METADATA_SECRET=hell0
-
 source config.cfg
 
 echo "########## CAI DAT NOVA TREN CONTROLLER ##########"
@@ -50,9 +45,9 @@ rabbit_host = controller
 rabbit_password = $RABBIT_PASS
 
 # Cau hinh cho VNC
-#my_ip = $CON_MGNT_IP
-#vncserver_listen = $CON_MGNT_IP
-#vncserver_proxyclient_address = $CON_MGNT_IP
+#my_ip = $CON_ADMIN_IP
+#vncserver_listen = $CON_ADMIN_IP
+#vncserver_proxyclient_address = $CON_ADMIN_IP
 
 # Tu dong Start VM khi reboot OpenStack
 resume_guests_state_on_host_boot=True

@@ -22,7 +22,7 @@ cat << EOF >> $iphost
 $CON_MGNT_IP    controller
 $COM1_MGNT_IP      compute1
 127.0.0.1        compute1
-$COM2_MGNT_IP      compute2
+# $COM2_MGNT_IP      compute2
 $NET_MGNT_IP     network
 EOF
 

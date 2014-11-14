@@ -32,18 +32,18 @@ state_path = /var/lib/cinder
 lock_path = /var/lock/cinder
 volumes_dir = /var/lib/cinder/volumes
 rpc_backend = cinder.openstack.common.rpc.impl_kombu
-rabbit_host = $CON_MGNT_IP
+rabbit_host = $CON_ADMIN_IP
 rabbit_port = 5672
 rabbit_userid = guest
 rabbit_password = $ADMIN_PASS
-glance_host = $CON_MGNT_IP
+glance_host = $CON_ADMIN_IP
  
 [database]
-connection = mysql://cinder:$ADMIN_PASS@$CON_MGNT_IP/cinder
+connection = mysql://cinder:$ADMIN_PASS@$CON_ADMIN_IP/cinder
  
 [keystone_authtoken]
-auth_uri = http://$CON_MGNT_IP:5000
-auth_host = $CON_MGNT_IP
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
