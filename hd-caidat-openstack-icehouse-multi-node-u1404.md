@@ -14,7 +14,7 @@ apt-get update
 
 apt-get install git -y
 	
-git clone https://github.com/longsube/U14.04_4-Net
+git clone https://github.com/congto/U14.04_4-Net
 	
 mv /root/U14.04_4-Net/script-U1404-4net script-U1404-4net
 
@@ -140,7 +140,7 @@ apt-get update
 
 apt-get install git -y
 
-git clone https://github.com/longsube/U14.04_4-Net
+git clone https://github.com/congto/U14.04_4-Net
 
 mv /root/U14.04_4-Net/script-U1404-4net script-U1404-4net
 
@@ -216,7 +216,7 @@ apt-get update
 
 apt-get install git -y
 
-git clone https://github.com/longsube/U14.04_4-Net
+git clone https://github.com/congto/U14.04_4-Net
 
 mv /root/U14.04_4-Net/script-U1404-4net script-U1404-4net
 
@@ -254,7 +254,7 @@ apt-get update
 
 apt-get install git -y
 
-git clone https://github.com/longsube/U14.04_4-Net
+git clone https://github.com/congto/U14.04_4-Net
 
 mv /root/U14.04_4-Net/script-U1404-4net script-U1404-4net
 
