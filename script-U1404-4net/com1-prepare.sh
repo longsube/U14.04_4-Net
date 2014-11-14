@@ -45,6 +45,10 @@ apt-get install python-mysqldb -y
 # Cai cac goi can thiet cho compute 
 apt-get install nova-compute-kvm python-guestfs -y
 apt-get install libguestfs-tools -y
+update-guestfs-appliance
+update-guestfs-appliance
+chmod 0644 /boot/vmlinuz*
+usermod -a -G kvm root
 
 ########
 echo "############ Cau hinh NTP ############"

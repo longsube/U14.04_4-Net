@@ -41,6 +41,9 @@ echo "############ Cai dat NTP ############"
 #Cai dat NTP va cau hinh can thiet 
 apt-get install ntp -y
 apt-get install python-mysqldb -y
+update-guestfs-appliance
+chmod 0644 /boot/vmlinuz*
+usermod -a -G kvm root
 
 # Cai cac goi can thiet cho compute 
 apt-get install nova-compute-kvm python-guestfs -y
