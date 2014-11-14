@@ -44,6 +44,7 @@ apt-get install python-mysqldb -y
 
 # Cai cac goi can thiet cho compute 
 apt-get install nova-compute-kvm python-guestfs -y
+apt-get install libguestfs-tools -y
 
 ########
 echo "############ Cau hinh NTP ############"
@@ -157,12 +158,17 @@ EOF
 # Xoa file sql mac dinh
 rm /var/lib/nova/nova.sqlite
 
+#Cau hinh mount thu muc /var/lib/nova/instances va _base
+#echo o; echo n; echo p; echo 1; echo ; echo; echo w) | sudo fdisk /dev/$INS
+#echo "/dev/$INS1 /mnt/iscsi ext4 _netdev 0 0" >> /etc/fstab
+
+
+
+
 # Cau hinh Live Migration
 echo 'listen_tls = 0' >> /etc/libvirt/libvirtd.conf
 echo 'listen_tcp = 1' >> /etc/libvirt/libvirtd.conf
 echo 'auth_tcp = "none"' >> /etc/libvirt/libvirtd.conf
-
-sed -i 's/server/#server/' /etc/ntp.conf
 
 sed -i 's/env libvirtd_opts="-d"/env libvirtd_opts="-d -l"' /etc/init/libvirt-bin.conf
 
@@ -180,6 +186,7 @@ live_migration_retry_count=60
 live_migration_uri=qemu+tcp://%s/system
 
 EOF
+
 
 service nova-compute restart
 
