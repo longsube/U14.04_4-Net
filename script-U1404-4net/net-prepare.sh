@@ -1,10 +1,5 @@
 #!/bin/bash -ex
 #
-# RABBIT_PASS=a
-# ADMIN_PASS=a
-# METADATA_SECRET=hell0
-# NET_IP_DATA=10.10.20.72 
-
 source config.cfg
 
 # Cau hinh cho file /etc/hosts
@@ -14,10 +9,10 @@ rm $iphost
 touch $iphost
 cat << EOF >> $iphost
 127.0.0.1       localhost
-$CON_MGNT_IP    controller
-$COM1_MGNT_IP      compute1
-# $COM2_MGNT_IP      compute2
-$NET_MGNT_IP     network
+$CON_ADMIN_IP    controller
+$COM1_ADMIN_IP      compute1
+# $COM2_ADMIN_IP      compute2
+$NET_ADMIN_IP     network
 127.0.1.1       network
 EOF
 
@@ -89,9 +84,9 @@ rabbit_host = controller
 rabbit_password = $RABBIT_PASS
 
 # Cau hinh cho VNC
-my_ip = $NET_MGNT_IP
-vncserver_listen = $NET_MGNT_IP
-vncserver_proxyclient_address = $NET_MGNT_IP
+my_ip = $NET_ADMIN_IP
+vncserver_listen = $NET_ADMIN_IP
+vncserver_proxyclient_address = $NET_ADMIN_IP
 
 [database]
 connection = mysql://nova:$ADMIN_PASS@controller/nova
