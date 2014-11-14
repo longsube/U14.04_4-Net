@@ -10,7 +10,7 @@ echo "########## Cau hinh br-int va br-ex cho OpenvSwitch ##########"
 sleep 5
 ovs-vsctl add-br br-int
 ovs-vsctl add-br br-ex
-ovs-vsctl add-port br-ex eth0
+ovs-vsctl add-port br-ex eth1
 
 echo "########## Cau hinh dia chi IP cho br-ex ##########"
 
@@ -22,10 +22,10 @@ cat << EOF > $ifaces
 auto lo
 iface lo inet loopback
 
-# NIC MGNT
-auto eth2
-iface eth2 inet static
-address $NET_MGNT_IP
+# NIC ADMIN
+auto eth0
+iface eth0 inet static
+address $NET_ADMIN_IP
 netmask $NETMASK_ADD_VM
 
 # NIC Bridge
@@ -37,16 +37,16 @@ gateway $GATEWAY_NET
 dns-nameservers 8.8.8.8
 
 # NIC External
-auto eth0
-iface eth0 inet manual
+auto eth1
+iface eth1 inet manual
    up ifconfig \$IFACE 0.0.0.0 up
    up ip link set \$IFACE promisc on
    down ip link set \$IFACE promisc off
    down ifconfig \$IFACE down
 
 # NIC DATA VM
-auto eth1
-iface eth1 inet static
+auto eth2
+iface eth2 inet static
 address $NET_DATA_VM_IP
 netmask $NETMASK_ADD
 EOF
