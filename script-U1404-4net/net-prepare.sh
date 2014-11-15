@@ -194,7 +194,7 @@ EOF
 # echo "Fix loi MTU"
 sleep 3
 echo "dhcp-option-force=26,1454" > /etc/neutron/dnsmasq-neutron.conf
-killall dnsmasq
+# killall dnsmasq
 
 echo "############  Sua file cau hinh METADATA AGENT ############"
 sleep 7 
@@ -288,7 +288,7 @@ EOF
 #ipsec_status_check_interval=60
 #EOF
 
-echo "############  Khoi dong lai OpenvSwitch ############"
+echo "############  Khoi dong lai OpenvSwitch lan 1 ############"
 sleep 7
 
 service openvswitch-switch restart
@@ -299,6 +299,7 @@ service neutron-metadata-agent restart
 service neutron-lbaas-agent restart
 #service neutron-vpn-agent restart
 
+echo "############  Khoi dong lai OpenvSwitch lan 2 ############"
 sleep 15
 service openvswitch-switch restart
 service neutron-plugin-openvswitch-agent restart
