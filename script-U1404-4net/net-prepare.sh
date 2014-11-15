@@ -11,7 +11,6 @@ cat << EOF >> $iphost
 127.0.0.1       localhost
 $CON_ADMIN_IP    controller
 $COM1_ADMIN_IP      compute1
-# $COM2_ADMIN_IP      compute2
 $NET_ADMIN_IP     network
 127.0.1.1       network
 EOF
