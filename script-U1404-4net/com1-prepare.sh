@@ -3,27 +3,17 @@
 
 source config.cfg
 
-# Cau hinh cho file /etc/hosts
-# COM1_IP_MGNT=10.10.10.73
-# COM1_IP_DATA=10.10.20.73
-# COM2_IP_MGNT=10.10.10.74
-# COM2_IP_DATA=10.10.20.74
-# CON_IP_EX=192.168.1.71
-# CON_IP_MGNT=10.10.10.71
-# ADMIN_PASS=a
-# RABBIT_PASS=a
-#
 iphost=/etc/hosts
 test -f $iphost.orig || cp $iphost $iphost.orig
 rm $iphost
 touch $iphost
 cat << EOF >> $iphost
 127.0.0.1       localhost
-$CON_MGNT_IP    controller
-$COM1_MGNT_IP      compute1
-127.0.0.1        compute1
-# $COM2_MGNT_IP      compute2
-$NET_MGNT_IP     network
+$CON_ADMIN_IP    controller
+$COM1_ADMIN_IP      compute1
+# 127.0.0.1        compute1
+# $COM2_ADMIN_IP      compute2
+$NET_ADMIN_IP     network
 EOF
 
 # Cai dat repos va update
@@ -121,10 +111,10 @@ auth_strategy = keystone
 rpc_backend = rabbit
 rabbit_host = controller
 rabbit_password = $RABBIT_PASS
-my_ip = $COM1_MGNT_IP
+my_ip = $COM1_ADMIN_IP
 vnc_enabled = True
 vncserver_listen = 0.0.0.0
-vncserver_proxyclient_address = $COM1_MGNT_IP
+vncserver_proxyclient_address = $COM1_ADMIN_IP
 novncproxy_base_url = http://$NET_EXT_IP:6080/vnc_auto.html
 glance_host = controller
 
