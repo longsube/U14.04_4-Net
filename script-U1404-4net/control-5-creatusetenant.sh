@@ -3,8 +3,8 @@
 source config.cfg
 
 export OS_SERVICE_TOKEN="$TOKEN_PASS"
-export OS_SERVICE_ENDPOINT="http://controller:35357/v2.0"
-export SERVICE_ENDPOINT="http://controller:35357/v2.0"
+export OS_SERVICE_ENDPOINT="http://$CON_ADMIN_IP:35357/v2.0"
+export SERVICE_ENDPOINT="http://$CON_ADMIN_IP:35357/v2.0"
 
 get_id () {
     echo `$@ | awk '/ id / { print $4 }'`
@@ -62,50 +62,50 @@ keystone service-create --name=keystone --type=identity --description="OpenStack
 keystone endpoint-create \
 --service-id=$(keystone service-list | awk '/ identity / {print $2}') \
 --publicurl=http://$CON_EXT_IP:5000/v2.0 \
---internalurl=http://controller:5000/v2.0 \
---adminurl=http://controller:35357/v2.0
+--internalurl=http://$CON_ADMIN_IP:5000/v2.0 \
+--adminurl=http://$CON_ADMIN_IP:35357/v2.0
 
 keystone service-create --name=glance --type=image --description="OpenStack Image Service"
 keystone endpoint-create \
 --service-id=$(keystone service-list | awk '/ image / {print $2}') \
 --publicurl=http://$CON_EXT_IP:9292 \
---internalurl=http://controller:9292 \
---adminurl=http://controller:9292
+--internalurl=http://$CON_ADMIN_IP:9292 \
+--adminurl=http://$CON_ADMIN_IP:9292
 
 keystone service-create --name=nova --type=compute --description="OpenStack Compute"
 keystone endpoint-create \
 --service-id=$(keystone service-list | awk '/ compute / {print $2}') \
 --publicurl=http://$CON_EXT_IP:8774/v2/%\(tenant_id\)s \
---internalurl=http://controller:8774/v2/%\(tenant_id\)s \
---adminurl=http://controller:8774/v2/%\(tenant_id\)s
+--internalurl=http://$CON_ADMIN_IP:8774/v2/%\(tenant_id\)s \
+--adminurl=http://$CON_ADMIN_IP:8774/v2/%\(tenant_id\)s
 
 keystone service-create --name neutron --type network --description "OpenStack Networking"
 keystone endpoint-create \
 --service-id $(keystone service-list | awk '/ network / {print $2}') \
 --publicurl http://$CON_EXT_IP:9696 \
---adminurl http://controller:9696 \
---internalurl http://controller:9696
+--adminurl http://$CON_ADMIN_IP:9696 \
+--internalurl http://$CON_ADMIN_IP:9696
 
 keystone service-create --name=cinder --type=volume --description="OpenStack Block Storage"
 keystone endpoint-create \
 --service-id=$(keystone service-list | awk '/ volume / {print $2}') \
 --publicurl=http://$CON_EXT_IP:8776/v1/%\(tenant_id\)s \
---internalurl=http://controller:8776/v1/%\(tenant_id\)s \
---adminurl=http://controller:8776/v1/%\(tenant_id\)s
+--internalurl=http://$CON_ADMIN_IP:8776/v1/%\(tenant_id\)s \
+--adminurl=http://$CON_ADMIN_IP:8776/v1/%\(tenant_id\)s
 
 keystone service-create --name=cinderv2 --type=volumev2 --description="OpenStack Block Storage v2"
 keystone endpoint-create \
 --service-id=$(keystone service-list | awk '/ volumev2 / {print $2}') \
 --publicurl=http://$CON_EXT_IP:8776/v2/%\(tenant_id\)s \
---internalurl=http://controller:8776/v2/%\(tenant_id\)s \
---adminurl=http://controller:8776/v2/%\(tenant_id\)s
+--internalurl=http://$CON_ADMIN_IP:8776/v2/%\(tenant_id\)s \
+--adminurl=http://$CON_ADMIN_IP:8776/v2/%\(tenant_id\)s
 
 echo "########## TAO FILE CHO BIEN MOI TRUONG ##########"
 sleep 5
 echo "export OS_USERNAME=admin" > admin-openrc.sh
 echo "export OS_PASSWORD=$ADMIN_PASS" >> admin-openrc.sh
 echo "export OS_TENANT_NAME=admin" >> admin-openrc.sh
-echo "export OS_AUTH_URL=http://controller:35357/v2.0" >> admin-openrc.sh
+echo "export OS_AUTH_URL=http://$CON_ADMIN_IP:35357/v2.0" >> admin-openrc.sh
 
 echo "########## Huy bien moi truong truoc do ##########"
 unset OS_SERVICE_TOKEN OS_SERVICE_ENDPOINT
