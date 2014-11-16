@@ -1,9 +1,5 @@
 #!/bin/bash -ex
 #
-# Khoi tao bien
-# TOKEN_PASS=a
-# MYSQL_PASS=a
-# ADMIN_PASS=a
 source config.cfg
 
 echo "##### Cai dat keystone #####"
@@ -24,7 +20,7 @@ log_dir = /var/log/keystone
 [catalog]
 [credential]
 [database]
-connection = mysql://keystone:$ADMIN_PASS@controller/keystone
+connection = mysql://keystone:$KEYSTONE_PASS@controller/keystone
 [ec2]
 [endpoint_filter]
 [federation]

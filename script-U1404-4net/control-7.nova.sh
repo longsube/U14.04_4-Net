@@ -67,7 +67,7 @@ neutron_url = http://controller:9696
 neutron_auth_strategy = keystone
 neutron_admin_tenant_name = service
 neutron_admin_username = neutron
-neutron_admin_password = $ADMIN_PASS
+neutron_admin_password = $NEUTRON_PASS
 neutron_admin_auth_url = http://controller:35357/v2.0
 linuxnet_interface_driver = nova.network.linux_net.LinuxOVSInterfaceDriver
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
@@ -76,7 +76,7 @@ service_neutron_metadata_proxy = true
 neutron_metadata_proxy_shared_secret = $METADATA_SECRET
 
 [database]
-connection = mysql://nova:$ADMIN_PASS@controller/nova
+connection = mysql://nova:$NOVA_PASS@controller/nova
 
 [keystone_authtoken]
 auth_uri = http://controller:5000
@@ -85,7 +85,7 @@ auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = nova
-admin_password = $ADMIN_PASS
+admin_password = $NOVA_PASS
 EOF
 
 echo "########## XOA FILE DB MAC DINH ##########"

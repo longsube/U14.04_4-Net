@@ -1,7 +1,5 @@
 #!/bin/bash -ex
 #
-# RABBIT_PASS=a
-# ADMIN_PASS=a
 
 source config.cfg
 
@@ -39,7 +37,7 @@ nova_url = http://controller:8774/v2
 nova_admin_username = nova
 #Thay ID trong lenh "keystone tenant-get service" vao dong duoi
 nova_admin_tenant_id = $SERVICE_ID
-nova_admin_password = $ADMIN_PASS
+nova_admin_password = $NOVA_PASS
 nova_admin_auth_url = http://controller:35357/v2.0
 core_plugin = ml2
 allow_overlapping_ips = True
@@ -59,7 +57,7 @@ auth_protocol = http
 auth_port = 35357
 admin_tenant_name = service
 admin_user = neutron
-admin_password = $ADMIN_PASS
+admin_password = $NEUTRON_PASS
 signing_dir = \$state_path/keystone-signing
 
 [database]

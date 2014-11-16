@@ -73,7 +73,7 @@ scrub_time = 43200
 scrubber_datadir = /var/lib/glance/scrubber
 image_cache_dir = /var/lib/glance/image-cache/
 [database]
-connection = mysql://glance:$ADMIN_PASS@controller/glance
+connection = mysql://glance:$GLANCE_PASS@controller/glance
 backend = sqlalchemy
 [keystone_authtoken]
 auth_uri = http://controller:5000
@@ -82,7 +82,7 @@ auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = glance
-admin_password = $ADMIN_PASS
+admin_password = $GLANCE_PASS
 [paste_deploy]
 flavor = keystone
 [store_type_location_strategy]
@@ -107,7 +107,7 @@ backlog = 4096
 api_limit_max = 1000
 limit_param_default = 25
 [database]
-connection = mysql://glance:$ADMIN_PASS@controller/glance
+connection = mysql://glance:$GLANCE_PASS@controller/glance
 backend = sqlalchemy
 [keystone_authtoken]
 auth_uri = http://controller:5000
@@ -116,7 +116,7 @@ auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = glance
-admin_password = $ADMIN_PASS
+admin_password = $GLANCE_PASS
 [paste_deploy]
 flavor = keystone
 EOF

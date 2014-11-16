@@ -35,7 +35,7 @@ rpc_backend = cinder.openstack.common.rpc.impl_kombu
 rabbit_host = $CON_ADMIN_IP
 rabbit_port = 5672
 rabbit_userid = guest
-rabbit_password = $ADMIN_PASS
+rabbit_password = $RABBIT_PASS
 glance_host = $CON_ADMIN_IP
  
 [database]
@@ -48,7 +48,7 @@ auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = cinder
-admin_password = $ADMIN_PASS
+admin_password = $CINDER_PASS
 
 EOF
 
