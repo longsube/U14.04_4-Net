@@ -1,9 +1,12 @@
 #!/bin/bash -ex
 
-
 source config.cfg
 
+# UPDATE Ubuntu
+apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y
+
 echo "########## Cai dat va cau hinh OpenvSwitch ##########"
+
 apt-get install -y openvswitch-controller openvswitch-switch openvswitch-datapath-dkms
 
 echo "########## Cau hinh br-int va br-ex cho OpenvSwitch ##########"
@@ -58,4 +61,3 @@ hostname -F /etc/hostname
 
 echo "##########  Khoi dong lai may sau khi cau hinh IP Address ##########"
 init 6
-
