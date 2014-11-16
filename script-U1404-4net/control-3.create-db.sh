@@ -6,8 +6,8 @@ source config.cfg
 echo "##### Cai dat MYSQL #####"
 sleep 3
 
-echo mysql-server mysql-server/root_password password $MYSQL_ADMIN_PASS | debconf-set-selections
-echo mysql-server mysql-server/root_password_again password $MYSQL_ADMIN_PASS | debconf-set-selections
+echo mysql-server mysql-server/root_password password $MYSQL_PASS | debconf-set-selections
+echo mysql-server mysql-server/root_password_again password $MYSQL_PASS | debconf-set-selections
 apt-get update
 apt-get install mysql-server python-mysqldb -y
 
