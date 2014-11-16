@@ -54,7 +54,7 @@ keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $NEUTRON_USER --rol
 CINDER_USER=$(get_id keystone user-create --name=cinder --pass="$CINDER_PASS" --tenant-id $SERVICE_TENANT --email=cinder@vdc.com.vn)
 keystone user-role-add --tenant-id $SERVICE_TENANT --user-id $CINDER_USER --role-id $ADMIN_ROLE
 
-echo "########## Bat dau tao ENDPOINT cho cac dich vu ########## "
+echo -e "\e[92m ########## Bat dau tao ENDPOINT cho cac dich vu ########## \e[0m"
 sleep 5 
 
 #API Endpoint
@@ -124,6 +124,3 @@ echo -e "\e[92mThu thi lenh duoi\e[0m"
 echo -e "\e[92msource admin-openrc.sh\e[0m"
 echo -e "\e[92m bash control-6.glance.sh\e[0m"
 
-# echo "#################### Kiem tra bien moi truong ##################"
-# sleep 5
-# keystone user-list

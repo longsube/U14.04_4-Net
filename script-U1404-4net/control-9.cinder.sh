@@ -39,7 +39,8 @@ rabbit_password = $RABBIT_PASS
 glance_host = $CON_ADMIN_IP
  
 [database]
-connection = mysql://cinder:$CINDER_DBBASS@$CON_ADMIN_IP/cinder
+connection = mysql://cinder:$CINDER_DBPASS@controller/cinder
+
  
 [keystone_authtoken]
 auth_uri = http://$CON_ADMIN_IP:5000

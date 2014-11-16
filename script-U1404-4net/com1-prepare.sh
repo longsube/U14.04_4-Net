@@ -291,7 +291,7 @@ echo "############ Tao integration bridge ############"
 sleep 5
 ########
 # Tao integration bridge
-ovs-vsctl add-br br-int
+# ovs-vsctl add-br br-int
 
 
 # fix loi libvirtError: internal error: no supported architecture for os type 'hvm'
