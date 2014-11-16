@@ -2,7 +2,7 @@
 #
 source config.cfg
 
-echo "##### Cai dat keystone #####"
+echo -e "\e[34m ##### Cai dat keystone #####\e[0m"
 apt-get install keystone -y
 
 #/* Sao luu truoc khi sua file nova.conf
@@ -43,15 +43,15 @@ connection = mysql://keystone:$KEYSTONE_DBPASS@controller/keystone
 Distribution = Ubuntu
 EOF
 #
-echo "##### Xoa DB mac dinh #####"
+echo -e "\e[34m ##### Xoa DB mac dinh #####\e[0m"
 rm  /var/lib/keystone/keystone.db
 
-echo "##### Khoi dong lai MYSQL #####"
+echo -e "\e[34m ##### Khoi dong lai MYSQL #####\e[0m"
 service keystone restart
 sleep 3
 service keystone restart
 
-echo "##### Dong bo cac bang trong DB #####"
+echo -e "\e[34m ##### Dong bo cac bang trong DB #####\e[0m"
 sleep 3
 keystone-manage db_sync
 

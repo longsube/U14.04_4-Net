@@ -3,7 +3,7 @@
 #Khai bao bien
 source config.cfg
  
-echo "##### Cai dat MYSQL #####"
+echo -e "\e[34m##### Cai dat MYSQL #####\e[0m"
 sleep 3
 
 echo mysql-server mysql-server/root_password password $MYSQL_PASS | debconf-set-selections
@@ -11,7 +11,7 @@ echo mysql-server mysql-server/root_password_again password $MYSQL_PASS | debcon
 apt-get update
 apt-get install mysql-server python-mysqldb -y
 
-echo "##### Cau hinh cho MYSQL #####"
+echo -e "\e[34m##### Cau hinh cho MYSQL #####\e[0m"
 sleep 3
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf
@@ -22,7 +22,7 @@ character-set-server = utf8" /etc/mysql/my.cnf
 #
 service mysql restart
 
-echo "##### Tao DATABASE #####"
+echo -e "\e[34m##### Tao DATABASE #####\e[0m"
 sleep 3
 
 cat << EOF | mysql -uroot -p$MYSQL_PASS
@@ -60,7 +60,7 @@ GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'controller' IDENTIFIED BY '$NEUT
 FLUSH PRIVILEGES;
 EOF
 #
-echo "##### KET THUC QUA TRINH CAI VA TAO DB #####"
+echo -e "\e[34m ##### KET THUC QUA TRINH CAI VA TAO DB #####\e[0m"
 exit;
 
 echo -e "\e[92m  Thu thi lenh duoi \e[0m"

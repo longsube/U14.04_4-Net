@@ -2,7 +2,7 @@
 #
 source config.cfg
 
-echo "########## CAI DAT NOVA TREN CONTROLLER ##########"
+echo -e "\e[34m ########## CAI DAT NOVA TREN CONTROLLER ##########\e[0m"
 sleep 5 
 apt-get -y install nova-api nova-cert nova-conductor nova-consoleauth nova-scheduler python-novaclient
 
@@ -88,18 +88,18 @@ admin_user = nova
 admin_password = $NOVA_PASS
 EOF
 
-echo "########## XOA FILE DB MAC DINH ##########"
+echo -e "\e[34m  ########## XOA FILE DB MAC DINH ##########\e[0m"
 sleep 7
 rm /var/lib/nova/nova.sqlite
 
-echo "########## DONG BO DB CHO NOVA ##########"
+echo -e "\e[34m ########## DONG BO DB CHO NOVA ##########\e[0m"
 sleep 7 
 nova-manage db sync
 
 # fix loi libvirtError: internal error: no supported architecture for os type 'hvm'
 echo 'kvm_intel' >> /etc/modules
 
-echo "########## KHOI DONG LAI NOVA ##########"
+echo -e "\e[34m ########## KHOI DONG LAI NOVA ##########\e[0m"
 sleep 7 
 service nova-api restart
 service nova-cert restart
@@ -108,7 +108,8 @@ service nova-scheduler restart
 service nova-conductor restart
 #service nova-novncproxy restart
 sleep 7 
-echo "########## KHOI DONG NOVA LAN 2 ##########"
+
+echo -e "\e[34m########## KHOI DONG NOVA LAN 2 ##########\e[0m"
 service nova-api restart
 service nova-cert restart
 service nova-consoleauth restart
@@ -119,5 +120,5 @@ service nova-conductor restart
 echo "########## KIEM TRA LAI DICH VU NOVA ##########"
 nova-manage service list
 
-echo "Thu thi lenh duoi"
-echo "bash control-8.neutron.sh"
+echo -e "\e[92m \e[5mBlink e[25m  Thu thi lenh duoi \e[0m"
+echo -e "\e[92m \e[5mBlink e[25m  bash control-8.neutron.sh \e[0m"
