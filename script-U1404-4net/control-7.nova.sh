@@ -120,5 +120,5 @@ service nova-conductor restart
 echo "########## KIEM TRA LAI DICH VU NOVA ##########"
 nova-manage service list
 
-echo -e "\e[92m \e[5mBlink e[25m  Thu thi lenh duoi \e[0m"
-echo -e "\e[92m \e[5mBlink e[25m  bash control-8.neutron.sh \e[0m"
+echo -e "\e[92m Thu thi lenh duoi \e[0m"
+echo -e "\e[92m bash control-8.neutron.sh \e[0m"

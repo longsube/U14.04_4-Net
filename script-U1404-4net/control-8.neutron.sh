@@ -111,5 +111,5 @@ echo "########## KHOI DONG LAI NEUTRON ##########"
 sleep 7 
 service neutron-server restart
 
-echo -e "\e[92m \e[5mBlink e[25m Thu thi lenh duoi \e[0m"
-echo -e "\e[92m \e[5mBlink e[25m control-9.cinder.sh\e[0m"
+echo -e "\e[92mThu thi lenh duoi \e[0m"
+echo -e "\e[92mbash control-9.cinder.sh\e[0m"
