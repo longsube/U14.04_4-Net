@@ -6,8 +6,8 @@ source config.cfg
 echo "##### Cai dat MYSQL #####"
 sleep 3
 
-echo mysql-server mysql-server/root_DBPASSword DBPASSword $MYSQL_PASS | debconf-set-selections
-echo mysql-server mysql-server/root_DBPASSword_again DBPASSword $MYSQL_PASS | debconf-set-selections
+echo mysql-server mysql-server/root_password password $MYSQL_PASS | debconf-set-selections
+echo mysql-server mysql-server/root_password_again password $MYSQL_PASS | debconf-set-selections
 apt-get update
 apt-get install mysql-server python-mysqldb -y
 
@@ -63,5 +63,5 @@ EOF
 echo "##### KET THUC QUA TRINH CAI VA TAO DB #####"
 exit;
 
-echo "Thu thi lenh duoi"
-echo "bash control-4.keystone.sh"
+echo -e "\e[92m Thu thi lenh duoi \e[0m"
+echo -e "\e[92m bash control-4.keystone.sh \e[0m"
