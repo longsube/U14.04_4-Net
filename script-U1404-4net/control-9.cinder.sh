@@ -66,3 +66,6 @@ service cinder-scheduler restart
 service cinder-volume restart
 
 echo "########## Hoan thanh viec cai dat CINDER ##########"
+
+echo " Chuyen sang thu hien tren NETWORK NODE va COMPUTE NODE"
+echo " Sau do quay lai CONTROLLER de cai Hoziron"
