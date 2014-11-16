@@ -44,3 +44,6 @@ sleep 3
 
 service rabbitmq-server restart
 echo "Da cai dat xong cac goi chuan bi"
+
+echo "Thu thi lenh duoi"
+echo "bash control-3.create-db.sh"

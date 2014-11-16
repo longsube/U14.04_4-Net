@@ -61,3 +61,7 @@ keystone-manage db_sync
 
 (crontab -l -u keystone 2>&1 | grep -q token_flush) || \
 echo '@hourly /usr/bin/keystone-manage token_flush >/var/log/keystone/keystone-tokenflush.log 2>&1' >> /var/spool/cron/crontabs/keystone
+
+echo "Thu thi lenh duoi"
+echo "bash control-5-creatusetenant.sh"
+

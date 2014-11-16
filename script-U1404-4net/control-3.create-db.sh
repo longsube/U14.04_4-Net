@@ -62,3 +62,6 @@ EOF
 #
 echo "##### KET THUC QUA TRINH CAI VA TAO DB #####"
 exit;
+
+echo "Thu thi lenh duoi"
+echo "bash control-4.keystone.sh"

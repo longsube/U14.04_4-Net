@@ -149,3 +149,6 @@ cd /root/
 sleep 7
 echo "########## Kiem tra lai image vua them vao GLANCE ##########"
 glance image-list
+
+echo "Thu thi lenh duoi"
+echo "bash control-7.nova.sh"

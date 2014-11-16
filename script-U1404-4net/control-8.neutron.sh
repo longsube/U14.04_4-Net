@@ -112,3 +112,6 @@ service nova-conductor restart
 echo "########## KHOI DONG LAI NEUTRON ##########"
 sleep 7 
 service neutron-server restart
+
+echo "Thu thi lenh duoi"
+echo "bash control-8.neutron.sh"

@@ -125,6 +125,10 @@ cp  admin-openrc.sh /root/admin-openrc.sh
 
 echo "########## Hoan thanh cai dat keystone ##########"
 
+echo "Thu thi lenh duoi"
+echo "source admin-openrc.sh"
+echo "bash control-6.glance.sh"
+
 # echo "#################### Kiem tra bien moi truong ##################"
 # sleep 5
 # keystone user-list

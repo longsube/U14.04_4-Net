@@ -119,3 +119,5 @@ service nova-conductor restart
 echo "########## KIEM TRA LAI DICH VU NOVA ##########"
 nova-manage service list
 
+echo "Thu thi lenh duoi"
+echo "bash control-8.neutron.sh"
