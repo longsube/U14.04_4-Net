@@ -111,5 +111,5 @@ echo "########## KHOI DONG LAI NEUTRON ##########"
 sleep 7 
 service neutron-server restart
 
-echo "Thu thi lenh duoi"
-echo "bash control-8.neutron.sh"
+echo -e "\e[92m \e[5mBlink e[25m Thu thi lenh duoi \e[0m"
+echo -e "\e[92m \e[5mBlink e[25m control-9.cinder.sh\e[0m"

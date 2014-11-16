@@ -88,7 +88,7 @@ vncserver_listen = $NET_ADMIN_IP
 vncserver_proxyclient_address = $NET_ADMIN_IP
 
 [database]
-connection = mysql://nova:$ADMIN_PASS@controller/nova
+connection = mysql://nova:$NOVA_DBPASS@controller/nova
 
 [keystone_authtoken]
 auth_uri = http://controller:5000
@@ -97,7 +97,7 @@ auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = nova
-admin_password = $ADMIN_PASS
+admin_password = $NOVA_PASS
 EOF
 
 
@@ -146,7 +146,7 @@ auth_protocol = http
 auth_port = 35357
 admin_tenant_name = service
 admin_user = neutron
-admin_password = $ADMIN_PASS
+admin_password = $NEUTRON_PASS
 signing_dir = \$state_path/keystone-signing
 
 [database]
@@ -210,7 +210,7 @@ auth_url = http://controller:5000/v2.0
 auth_region = regionOne
 admin_tenant_name = service
 admin_user = neutron
-admin_password = $ADMIN_PASS
+admin_password = $NEUTRON_PASS
 nova_metadata_ip = controller
 metadata_proxy_shared_secret = $METADATA_SECRET
 verbose = True
