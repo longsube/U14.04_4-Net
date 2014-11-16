@@ -20,7 +20,7 @@ log_dir = /var/log/keystone
 [catalog]
 [credential]
 [database]
-connection = mysql://keystone:$KEYSTONE_PASS@controller/keystone
+connection = mysql://keystone:$KEYSTONE_DBPASS@controller/keystone
 [ec2]
 [endpoint_filter]
 [federation]

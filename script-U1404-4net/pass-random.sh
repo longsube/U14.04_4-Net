@@ -27,13 +27,20 @@ DEFAULT_PASS='Welcome123'
 
 RABBIT_PASS=`openssl rand -hex 10`
 MYSQL_PASS=`openssl rand -hex 10`
-# MYSQL_ADMIN_PASS="$MYSQL_PASS"
 TOKEN_PASS=`openssl rand -hex 10`
 ADMIN_PASS=`openssl rand -hex 10`
 DEMO_PASS=`openssl rand -hex 10`
 SERVICE_PASSWORD=`openssl rand -hex 10`
 METADATA_SECRET=`openssl rand -hex 10`
 
+# PASS CHO DB
+KEYSTONE_DBPASS=`openssl rand -hex 10`
+NOVA_DBPASS=`openssl rand -hex 10`
+CINDER_DBPASS=`openssl rand -hex 10`
+GLANCE_DBPASS=`openssl rand -hex 10`
+NEUTRON_DBPASS=`openssl rand -hex 10`
+
+# PASS cho service
 KEYSTONE_PASS=`openssl rand -hex 10`
 NOVA_PASS=`openssl rand -hex 10`
 CINDER_PASS=`openssl rand -hex 10`

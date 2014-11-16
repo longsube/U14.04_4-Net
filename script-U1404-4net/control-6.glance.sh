@@ -73,7 +73,7 @@ scrub_time = 43200
 scrubber_datadir = /var/lib/glance/scrubber
 image_cache_dir = /var/lib/glance/image-cache/
 [database]
-connection = mysql://glance:$GLANCE_PASS@controller/glance
+connection = mysql://glance:$GLANCE_DBPASS@controller/glance
 backend = sqlalchemy
 [keystone_authtoken]
 auth_uri = http://controller:5000
@@ -107,7 +107,7 @@ backlog = 4096
 api_limit_max = 1000
 limit_param_default = 25
 [database]
-connection = mysql://glance:$GLANCE_PASS@controller/glance
+connection = mysql://glance:$GLANCE_DBPASS@controller/glance
 backend = sqlalchemy
 [keystone_authtoken]
 auth_uri = http://controller:5000
@@ -150,5 +150,5 @@ sleep 7
 echo "########## Kiem tra lai image vua them vao GLANCE ##########"
 glance image-list
 
-echo "Thu thi lenh duoi"
-echo "bash control-7.nova.sh"
+echo -e "\e[92m Thu thi lenh duoi \e[0m"
+echo -e "\e[92m bash control-7.nova.sh  \e[0m"

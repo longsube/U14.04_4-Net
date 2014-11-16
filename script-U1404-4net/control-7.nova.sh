@@ -76,7 +76,7 @@ service_neutron_metadata_proxy = true
 neutron_metadata_proxy_shared_secret = $METADATA_SECRET
 
 [database]
-connection = mysql://nova:$NOVA_PASS@controller/nova
+connection = mysql://nova:$NOVA_DBPASS@controller/nova
 
 [keystone_authtoken]
 auth_uri = http://controller:5000
