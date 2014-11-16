@@ -63,5 +63,5 @@ EOF
 echo "##### KET THUC QUA TRINH CAI VA TAO DB #####"
 exit;
 
-echo -e "\e[92m Thu thi lenh duoi \e[0m"
-echo -e "\e[92m bash control-4.keystone.sh \e[0m"
+echo -e "\e[92m  Thu thi lenh duoi \e[0m"
+echo -e "\e[92m \e[5mBlink e[25m bash control-4.keystone.sh \e[0m"
