@@ -61,7 +61,7 @@ admin_password = $NEUTRON_PASS
 signing_dir = \$state_path/keystone-signing
 
 [database]
-connection = mysql://neutron:$ADMIN_PASS@controller/neutron
+connection = mysql://neutron:$NEUTRON_DBPASS@controller/neutron
 
 [service_providers]
 service_provider=LOADBALANCER:Haproxy:neutron.services.loadbalancer.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default
