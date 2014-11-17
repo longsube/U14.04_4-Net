@@ -7,7 +7,6 @@ sleep 3
 echo "VDCITC011101" > /etc/hostname
 hostname -F /etc/hostname
 
-
 ifaces=/etc/network/interfaces
 test -f $ifaces.orig || cp $ifaces $ifaces.orig
 rm $ifaces
@@ -27,13 +26,11 @@ netmask $NETMASK_ADD_VM
 gateway $GATEWAY_IP
 dns-nameservers 8.8.8.8
 
-
 # NIC DATA VM
 auto eth2
 iface eth2 inet static
 address $COM1_DATA_VM_IP
 netmask $NETMASK_ADD
-
 
 EOF
 
@@ -44,12 +41,8 @@ EOF
 # ifdown eth0 && ifup eth0
 # ifdown eth0 && ifup eth0
 
-
 #sleep 5
 
 init 6
 #
-
-
-
 
