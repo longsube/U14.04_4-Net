@@ -6,12 +6,12 @@ source config.cfg
 SERVICE_ID=`keystone tenant-get service | awk '$2~/^id/{print $4}'`
 
 
-echo "########## CAI DAT NEUTRON TREN CONTROLLER################"
+echo "########## CAI DAT NEUTRON TREN $CON_ADMIN_IP################"
 sleep 5
 apt-get -y install neutron-server neutron-plugin-ml2
 
-######## SAO LUU CAU HINH NEUTRON.CONF CHO CONTROLLER##################"
-echo "########## SUA FILE CAU HINH  NEUTRON CHO CONTROLLER ##########"
+######## SAO LUU CAU HINH NEUTRON.CONF CHO $CON_ADMIN_IP##################"
+echo "########## SUA FILE CAU HINH  NEUTRON CHO $CON_ADMIN_IP ##########"
 sleep 7
 
 #
@@ -22,7 +22,7 @@ touch $controlneutron
 cat << EOF >> $controlneutron
 [DEFAULT]
 rpc_backend = neutron.openstack.common.rpc.impl_kombu
-rabbit_host = controller
+rabbit_host = $CON_ADMIN_IP
 rabbit_password = $RABBIT_PASS
 state_path = /var/lib/neutron
 lock_path = \$state_path/lock
@@ -33,12 +33,12 @@ verbose = True
 auth_strategy = keystone
 notify_nova_on_port_status_changes = True
 notify_nova_on_port_data_changes = True
-nova_url = http://controller:8774/v2
+nova_url = http://$CON_ADMIN_IP:8774/v2
 nova_admin_username = nova
 #Thay ID trong lenh "keystone tenant-get service" vao dong duoi
 nova_admin_tenant_id = $SERVICE_ID
 nova_admin_password = $NOVA_PASS
-nova_admin_auth_url = http://controller:35357/v2.0
+nova_admin_auth_url = http://$CON_ADMIN_IP:35357/v2.0
 core_plugin = ml2
 allow_overlapping_ips = True
 
@@ -51,8 +51,8 @@ service_plugins = router,lbaas
 root_helper = sudo /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf
 
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_protocol = http
 auth_port = 35357
 admin_tenant_name = service
@@ -61,7 +61,7 @@ admin_password = $NEUTRON_PASS
 signing_dir = \$state_path/keystone-signing
 
 [database]
-connection = mysql://neutron:$NEUTRON_DBPASS@controller/neutron
+connection = mysql://neutron:$NEUTRON_DBPASS@$CON_ADMIN_IP/neutron
 
 [service_providers]
 service_provider=LOADBALANCER:Haproxy:neutron.services.loadbalancer.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default
@@ -70,8 +70,8 @@ service_provider=LOADBALANCER:Haproxy:neutron.services.loadbalancer.drivers.hapr
 EOF
 
 
-######## SAO LUU CAU HINH ML2 CHO CONTROLLER##################"
-echo "########## SUA FILE CAU HINH  ML2 CHO CONTROLLER ##########"
+######## SAO LUU CAU HINH ML2 CHO $CON_ADMIN_IP##################"
+echo "########## SUA FILE CAU HINH  ML2 CHO $CON_ADMIN_IP ##########"
 sleep 7
 
 controlML2=/etc/neutron/plugins/ml2/ml2_conf.ini

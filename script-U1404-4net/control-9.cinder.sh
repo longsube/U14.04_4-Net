@@ -39,7 +39,7 @@ rabbit_password = $RABBIT_PASS
 glance_host = $CON_ADMIN_IP
  
 [database]
-connection = mysql://cinder:$CINDER_DBPASS@controller/cinder
+connection = mysql://cinder:$CINDER_DBPASS@$CON_ADMIN_IP/cinder
 
  
 [keystone_authtoken]
@@ -69,4 +69,4 @@ service cinder-volume restart
 echo "########## Hoan thanh viec cai dat CINDER ##########"
 
 echo -e "\e[92m \e[5mBlink e[25m  Chuyen sang thu hien tren NETWORK NODE va COMPUTE NODE \e[0m"
-echo -e "\e[92m \e[5mBlink e[25m   Sau do quay lai CONTROLLER de cai Hoziron\e[0m "
+echo -e "\e[92m \e[5mBlink e[25m   Sau do quay lai $CON_ADMIN_IP de cai Hoziron\e[0m "

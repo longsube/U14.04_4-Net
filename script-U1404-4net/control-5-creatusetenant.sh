@@ -60,6 +60,7 @@ sleep 5
 #API Endpoint
 keystone service-create --name=keystone --type=identity --description="OpenStack Identity"
 keystone endpoint-create \
+--region=$REGIONNAME \
 --service-id=$(keystone service-list | awk '/ identity / {print $2}') \
 --publicurl=http://$CON_ADMIN_IP:5000/v2.0 \
 --internalurl=http://$CON_ADMIN_IP:5000/v2.0 \
@@ -67,6 +68,7 @@ keystone endpoint-create \
 
 keystone service-create --name=glance --type=image --description="OpenStack Image Service"
 keystone endpoint-create \
+--region=$REGIONNAME \
 --service-id=$(keystone service-list | awk '/ image / {print $2}') \
 --publicurl=http://$CON_ADMIN_IP:9292 \
 --internalurl=http://$CON_ADMIN_IP:9292 \
@@ -74,6 +76,7 @@ keystone endpoint-create \
 
 keystone service-create --name=nova --type=compute --description="OpenStack Compute"
 keystone endpoint-create \
+--region=$REGIONNAME \
 --service-id=$(keystone service-list | awk '/ compute / {print $2}') \
 --publicurl=http://$CON_ADMIN_IP:8774/v2/%\(tenant_id\)s \
 --internalurl=http://$CON_ADMIN_IP:8774/v2/%\(tenant_id\)s \
@@ -81,6 +84,7 @@ keystone endpoint-create \
 
 keystone service-create --name neutron --type network --description "OpenStack Networking"
 keystone endpoint-create \
+--region=$REGIONNAME \
 --service-id $(keystone service-list | awk '/ network / {print $2}') \
 --publicurl http://$CON_ADMIN_IP:9696 \
 --adminurl http://$CON_ADMIN_IP:9696 \
@@ -88,6 +92,7 @@ keystone endpoint-create \
 
 keystone service-create --name=cinder --type=volume --description="OpenStack Block Storage"
 keystone endpoint-create \
+--region=$REGIONNAME \
 --service-id=$(keystone service-list | awk '/ volume / {print $2}') \
 --publicurl=http://$CON_ADMIN_IP:8776/v1/%\(tenant_id\)s \
 --internalurl=http://$CON_ADMIN_IP:8776/v1/%\(tenant_id\)s \
@@ -95,6 +100,7 @@ keystone endpoint-create \
 
 keystone service-create --name=cinderv2 --type=volumev2 --description="OpenStack Block Storage v2"
 keystone endpoint-create \
+--region=$REGIONNAME \
 --service-id=$(keystone service-list | awk '/ volumev2 / {print $2}') \
 --publicurl=http://$CON_ADMIN_IP:8776/v2/%\(tenant_id\)s \
 --internalurl=http://$CON_ADMIN_IP:8776/v2/%\(tenant_id\)s \

@@ -37,7 +37,7 @@ rm /etc/ntp.conf
 cat /etc/ntp.conf.bka | grep -v ^# | grep -v ^$ >> /etc/ntp.conf
 #
 sed -i 's/server/#server/' /etc/ntp.conf
-echo "server controller" >> /etc/ntp.conf
+echo "server $CON_ADMIN_IP" >> /etc/ntp.conf
 
 #
 echo "############ Cau hinh forward goi tin cho cac VM ############"
@@ -80,7 +80,7 @@ auth_strategy = keystone
 
 # Khai bao cho RABBITMQ
 rpc_backend = rabbit
-rabbit_host = controller
+rabbit_host = $CON_ADMIN_IP
 rabbit_password = $RABBIT_PASS
 
 # Cau hinh cho VNC
@@ -89,11 +89,11 @@ vncserver_listen = $NET_ADMIN_IP
 vncserver_proxyclient_address = $NET_ADMIN_IP
 
 [database]
-connection = mysql://nova:$NOVA_DBPASS@controller/nova
+connection = mysql://nova:$NOVA_DBPASS@$CON_ADMIN_IP/nova
 
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
@@ -124,7 +124,7 @@ cat << EOF >> $netneutron
 [DEFAULT]
 auth_strategy = keystone
 rpc_backend = neutron.openstack.common.rpc.impl_kombu
-rabbit_host = controller
+rabbit_host = $CON_ADMIN_IP
 rabbit_password = $RABBIT_PASS
 core_plugin = ml2
 allow_overlapping_ips = True
@@ -141,8 +141,8 @@ service_plugins = router,lbaas
 root_helper = sudo /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf
 
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_protocol = http
 auth_port = 35357
 admin_tenant_name = service
@@ -207,12 +207,12 @@ touch $netmetadata
 
 cat << EOF >> $netmetadata
 [DEFAULT]
-auth_url = http://controller:5000/v2.0
-auth_region = regionOne
+auth_url = http://$CON_ADMIN_IP:5000/v2.0
+auth_region = $REGIONNAME
 admin_tenant_name = service
 admin_user = neutron
 admin_password = $NEUTRON_PASS
-nova_metadata_ip = controller
+nova_metadata_ip = $CON_ADMIN_IP
 metadata_proxy_shared_secret = $METADATA_SECRET
 verbose = True
 EOF
@@ -335,7 +335,7 @@ sleep 5
 echo "export OS_USERNAME=admin" > admin-openrc.sh
 echo "export OS_PASSWORD=$ADMIN_PASS" >> admin-openrc.sh
 echo "export OS_TENANT_NAME=admin" >> admin-openrc.sh
-echo "export OS_AUTH_URL=http://controller:35357/v2.0" >> admin-openrc.sh
+echo "export OS_AUTH_URL=http://$CON_ADMIN_IP:35357/v2.0" >> admin-openrc.sh
 
 echo "############ kiem tra cac agent ############ "
 sleep 1 
