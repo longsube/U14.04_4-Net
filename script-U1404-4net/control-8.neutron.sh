@@ -6,7 +6,7 @@ source config.cfg
 SERVICE_ID=`keystone tenant-get service | awk '$2~/^id/{print $4}'`
 
 
-echo "########## CAI DAT NEUTRON TREN $CON_ADMIN_IP################"
+echo -e "\e[34m  ########## CAI DAT NEUTRON TREN $CON_ADMIN_IP############ \e[0m"
 sleep 5
 apt-get -y install neutron-server neutron-plugin-ml2
 
@@ -71,7 +71,7 @@ EOF
 
 
 ######## SAO LUU CAU HINH ML2 CHO $CON_ADMIN_IP##################"
-echo "########## SUA FILE CAU HINH  ML2 CHO $CON_ADMIN_IP ##########"
+echo -e "\e[34m  SUA FILE CAU HINH  ML2 CHO $CON_ADMIN_IP ##########  \e[0m"
 sleep 7
 
 controlML2=/etc/neutron/plugins/ml2/ml2_conf.ini
@@ -101,15 +101,15 @@ EOF
 
 
 
-echo "########## KHOI DONG LAI NOVA ##########"
+echo -e "\e[34m  ######## KHOI DONG LAI NOVA ########## \e[0m"
 sleep 7 
 service nova-api restart
 service nova-scheduler restart
 service nova-conductor restart
 
-echo "########## KHOI DONG LAI NEUTRON ##########"
+echo -e "\e[34m  ########## KHOI DONG LAI NEUTRON ########## \e[0m"
 sleep 7 
 service neutron-server restart
 
-echo -e "\e[92mThu thi lenh duoi \e[0m"
+echo -e "\e[92mThuc thi lenh duoi \e[0m"
 echo -e "\e[92mbash control-9.cinder.sh\e[0m"

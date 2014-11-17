@@ -150,5 +150,5 @@ sleep 7
 echo "########## Kiem tra lai image vua them vao GLANCE ##########"
 glance image-list
 
-echo -e "\e[92m Thu thi lenh duoi \e[0m"
+echo -e "\e[92m Thuc thi lenh duoi \e[0m"
 echo -e "\e[92m bash control-7.nova.sh  \e[0m"
