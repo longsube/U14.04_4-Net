@@ -9,11 +9,12 @@ test -f $iphost.orig || cp $iphost $iphost.orig
 rm $iphost
 touch $iphost
 cat << EOF >> $iphost
-127.0.0.1       localhost
-# 127.0.1.1       controller
-$CON_ADMIN_IP    controller
-$COM1_ADMIN_IP      compute1
-$NET_ADMIN_IP     network
+127.0.0.1       	localhost
+$CON_ADMIN_IP   	VDCITC01101
+$NET_ADMIN_IP     	VDCITN3101
+$COM1_ADMIN_IP      VDCITC011101
+$COM2_ADMIN_IP		VDCITC011102
+$COM3_ADMIN_IP		VDCITC011103
 EOF
 
 # Cai dat repos va update

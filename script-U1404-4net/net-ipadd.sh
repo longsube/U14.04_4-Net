@@ -56,7 +56,7 @@ EOF
 
 echo "Cau hinh hostname cho NETWORK NODE"
 sleep 3
-echo "network" > /etc/hostname
+echo "VDCITN3101" > /etc/hostname
 hostname -F /etc/hostname
 
 echo "##########  Khoi dong lai may sau khi cau hinh IP Address ##########"

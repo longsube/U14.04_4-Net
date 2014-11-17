@@ -4,7 +4,7 @@ source config.cfg
 
 echo "Cau hinh hostname cho COMPUTE1 NODE"
 sleep 3
-echo "compute1" > /etc/hostname
+echo "VDCITC011101" > /etc/hostname
 hostname -F /etc/hostname
 
 

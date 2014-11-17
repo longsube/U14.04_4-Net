@@ -32,7 +32,7 @@ EOF
 
 echo "Cau hinh hostname cho CONTROLLER NODE"
 sleep 3
-echo "controller" > /etc/hostname
+echo "VDCITC01101" > /etc/hostname
 hostname -F /etc/hostname
 
 #Khoi dong lai cac card mang vua dat
