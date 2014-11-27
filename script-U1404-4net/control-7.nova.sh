@@ -1,13 +1,8 @@
 #!/bin/bash -ex
 #
-# RABBIT_PASS=a
-# ADMIN_PASS=a
-# CON_IP_MGNT=10.10.10.71
-# METADATA_SECRET=hell0
-
 source config.cfg
 
-echo "########## CAI DAT NOVA TREN CONTROLLER ##########"
+echo -e "\e[34m ########## CAI DAT NOVA TREN $CON_ADMIN_IP ##########\e[0m"
 sleep 5 
 apt-get -y install nova-api nova-cert nova-conductor nova-consoleauth nova-scheduler python-novaclient
 
@@ -46,13 +41,13 @@ quota_cores=9999
 
 # Khai bao cho RABBITMQ
 rpc_backend = rabbit
-rabbit_host = controller
+rabbit_host = $CON_ADMIN_IP
 rabbit_password = $RABBIT_PASS
 
 # Cau hinh cho VNC
-#my_ip = $CON_MGNT_IP
-#vncserver_listen = $CON_MGNT_IP
-#vncserver_proxyclient_address = $CON_MGNT_IP
+#my_ip = $CON_ADMIN_IP
+#vncserver_listen = $CON_ADMIN_IP
+#vncserver_proxyclient_address = $CON_ADMIN_IP
 
 # Tu dong Start VM khi reboot OpenStack
 resume_guests_state_on_host_boot=True
@@ -68,12 +63,12 @@ enable_instance_password = True
 
 
 network_api_class = nova.network.neutronv2.api.API
-neutron_url = http://controller:9696
+neutron_url = http://$CON_ADMIN_IP:9696
 neutron_auth_strategy = keystone
 neutron_admin_tenant_name = service
 neutron_admin_username = neutron
-neutron_admin_password = $ADMIN_PASS
-neutron_admin_auth_url = http://controller:35357/v2.0
+neutron_admin_password = $NEUTRON_PASS
+neutron_admin_auth_url = http://$CON_ADMIN_IP:35357/v2.0
 linuxnet_interface_driver = nova.network.linux_net.LinuxOVSInterfaceDriver
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
 security_group_api = neutron
@@ -81,30 +76,30 @@ service_neutron_metadata_proxy = true
 neutron_metadata_proxy_shared_secret = $METADATA_SECRET
 
 [database]
-connection = mysql://nova:$ADMIN_PASS@controller/nova
+connection = mysql://nova:$NOVA_DBPASS@$CON_ADMIN_IP/nova
 
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = nova
-admin_password = $ADMIN_PASS
+admin_password = $NOVA_PASS
 EOF
 
-echo "########## XOA FILE DB MAC DINH ##########"
+echo -e "\e[34m  ########## XOA FILE DB MAC DINH ##########\e[0m"
 sleep 7
 rm /var/lib/nova/nova.sqlite
 
-echo "########## DONG BO DB CHO NOVA ##########"
+echo -e "\e[34m ########## DONG BO DB CHO NOVA ##########\e[0m"
 sleep 7 
 nova-manage db sync
 
 # fix loi libvirtError: internal error: no supported architecture for os type 'hvm'
 echo 'kvm_intel' >> /etc/modules
 
-echo "########## KHOI DONG LAI NOVA ##########"
+echo -e "\e[34m ########## KHOI DONG LAI NOVA ##########\e[0m"
 sleep 7 
 service nova-api restart
 service nova-cert restart
@@ -113,7 +108,8 @@ service nova-scheduler restart
 service nova-conductor restart
 #service nova-novncproxy restart
 sleep 7 
-echo "########## KHOI DONG NOVA LAN 2 ##########"
+
+echo -e "\e[34m########## KHOI DONG NOVA LAN 2 ##########\e[0m"
 service nova-api restart
 service nova-cert restart
 service nova-consoleauth restart
@@ -124,3 +120,5 @@ service nova-conductor restart
 echo "########## KIEM TRA LAI DICH VU NOVA ##########"
 nova-manage service list
 
+echo -e "\e[92m Thuc thi lenh duoi \e[0m"
+echo -e "\e[92m bash control-8.neutron.sh \e[0m"

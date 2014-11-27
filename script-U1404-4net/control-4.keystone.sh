@@ -1,12 +1,8 @@
 #!/bin/bash -ex
 #
-# Khoi tao bien
-# TOKEN_PASS=a
-# MYSQL_PASS=a
-# ADMIN_PASS=a
 source config.cfg
 
-echo "##### Cai dat keystone #####"
+echo -e "\e[34m ##### Cai dat keystone #####\e[0m"
 apt-get install keystone -y
 
 #/* Sao luu truoc khi sua file nova.conf
@@ -24,7 +20,7 @@ log_dir = /var/log/keystone
 [catalog]
 [credential]
 [database]
-connection = mysql://keystone:$ADMIN_PASS@controller/keystone
+connection = mysql://keystone:$KEYSTONE_DBPASS@$CON_ADMIN_IP/keystone
 [ec2]
 [endpoint_filter]
 [federation]
@@ -47,17 +43,21 @@ connection = mysql://keystone:$ADMIN_PASS@controller/keystone
 Distribution = Ubuntu
 EOF
 #
-echo "##### Xoa DB mac dinh #####"
+echo -e "\e[34m ##### Xoa DB mac dinh #####\e[0m"
 rm  /var/lib/keystone/keystone.db
 
-echo "##### Khoi dong lai MYSQL #####"
+echo -e "\e[34m ##### Khoi dong lai MYSQL #####\e[0m"
 service keystone restart
 sleep 3
 service keystone restart
 
-echo "##### Dong bo cac bang trong DB #####"
+echo -e "\e[34m ##### Dong bo cac bang trong DB #####\e[0m"
 sleep 3
 keystone-manage db_sync
 
 (crontab -l -u keystone 2>&1 | grep -q token_flush) || \
 echo '@hourly /usr/bin/keystone-manage token_flush >/var/log/keystone/keystone-tokenflush.log 2>&1' >> /var/spool/cron/crontabs/keystone
+
+echo -e "\e[92m Thu thi lenh duoi \e[0m"
+echo -e "\e[92m bash control-5-creatusetenant.sh \e[0m"
+

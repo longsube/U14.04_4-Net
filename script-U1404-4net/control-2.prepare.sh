@@ -9,12 +9,12 @@ test -f $iphost.orig || cp $iphost $iphost.orig
 rm $iphost
 touch $iphost
 cat << EOF >> $iphost
-127.0.0.1       localhost
-127.0.1.1       controller
-$CON_MGNT_IP    controller
-$COM1_MGNT_IP      compute1
-# 10.10.10.74      compute2
-$NET_MGNT_IP     network
+127.0.0.1       	localhost
+$CON_ADMIN_IP   	VDCITC01101
+$NET_ADMIN_IP     	VDCITN3101
+$COM1_ADMIN_IP      VDCITC011101
+$COM2_ADMIN_IP		VDCITC011102
+$COM3_ADMIN_IP		VDCITC011103
 EOF
 
 # Cai dat repos va update
@@ -45,3 +45,6 @@ sleep 3
 
 service rabbitmq-server restart
 echo "Da cai dat xong cac goi chuan bi"
+
+echo -e "\e[92m Thu thi lenh duoi \e[0m"
+echo -e "\e[92m bash control-3.create-db.sh \e[0m"

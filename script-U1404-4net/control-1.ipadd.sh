@@ -12,10 +12,10 @@ cat << EOF >> $ifaces
 auto lo
 iface lo inet loopback
 
-# MGNT NETWORK
+# ADMIN NETWORK
 auto eth0
 iface eth0 inet static
-address $CON_MGNT_IP
+address $CON_ADMIN_IP
 netmask $NETMASK_ADD_VM
 gateway $GATEWAY_IP
 dns-nameservers 8.8.8.8
@@ -32,7 +32,7 @@ EOF
 
 echo "Cau hinh hostname cho CONTROLLER NODE"
 sleep 3
-echo "controller" > /etc/hostname
+echo "VDCITC01101" > /etc/hostname
 hostname -F /etc/hostname
 
 #Khoi dong lai cac card mang vua dat

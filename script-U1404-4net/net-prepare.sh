@@ -1,10 +1,5 @@
 #!/bin/bash -ex
 #
-# RABBIT_PASS=a
-# ADMIN_PASS=a
-# METADATA_SECRET=hell0
-# NET_IP_DATA=10.10.20.72 
-
 source config.cfg
 
 # Cau hinh cho file /etc/hosts
@@ -13,12 +8,12 @@ test -f $iphost.orig || cp $iphost $iphost.orig
 rm $iphost
 touch $iphost
 cat << EOF >> $iphost
-127.0.0.1       localhost
-$CON_MGNT_IP    controller
-$COM1_MGNT_IP      compute1
-$COM2_MGNT_IP      compute2
-$NET_MGNT_IP     network
-127.0.1.1       network
+127.0.0.1       	localhost
+$CON_ADMIN_IP   	VDCITC01101
+$NET_ADMIN_IP     	VDCITN3101
+$COM1_ADMIN_IP      VDCITC011101
+$COM2_ADMIN_IP		VDCITC011102
+$COM3_ADMIN_IP		VDCITC011103
 EOF
 
 # Cai dat repos va update
@@ -42,7 +37,7 @@ rm /etc/ntp.conf
 cat /etc/ntp.conf.bka | grep -v ^# | grep -v ^$ >> /etc/ntp.conf
 #
 sed -i 's/server/#server/' /etc/ntp.conf
-echo "server controller" >> /etc/ntp.conf
+echo "server $CON_ADMIN_IP" >> /etc/ntp.conf
 
 #
 echo "############ Cau hinh forward goi tin cho cac VM ############"
@@ -85,25 +80,25 @@ auth_strategy = keystone
 
 # Khai bao cho RABBITMQ
 rpc_backend = rabbit
-rabbit_host = controller
+rabbit_host = $CON_ADMIN_IP
 rabbit_password = $RABBIT_PASS
 
 # Cau hinh cho VNC
-my_ip = $NET_MGNT_IP
-vncserver_listen = $NET_MGNT_IP
-vncserver_proxyclient_address = $NET_MGNT_IP
+my_ip = $NET_ADMIN_IP
+vncserver_listen = $NET_ADMIN_IP
+vncserver_proxyclient_address = $NET_ADMIN_IP
 
 [database]
-connection = mysql://nova:$ADMIN_PASS@controller/nova
+connection = mysql://nova:$NOVA_DBPASS@$CON_ADMIN_IP/nova
 
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = nova
-admin_password = $ADMIN_PASS
+admin_password = $NOVA_PASS
 EOF
 
 
@@ -129,7 +124,7 @@ cat << EOF >> $netneutron
 [DEFAULT]
 auth_strategy = keystone
 rpc_backend = neutron.openstack.common.rpc.impl_kombu
-rabbit_host = controller
+rabbit_host = $CON_ADMIN_IP
 rabbit_password = $RABBIT_PASS
 core_plugin = ml2
 allow_overlapping_ips = True
@@ -146,13 +141,13 @@ service_plugins = router,lbaas
 root_helper = sudo /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf
 
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_protocol = http
 auth_port = 35357
 admin_tenant_name = service
 admin_user = neutron
-admin_password = $ADMIN_PASS
+admin_password = $NEUTRON_PASS
 signing_dir = \$state_path/keystone-signing
 
 [database]
@@ -199,7 +194,7 @@ EOF
 # echo "Fix loi MTU"
 sleep 3
 echo "dhcp-option-force=26,1454" > /etc/neutron/dnsmasq-neutron.conf
-killall dnsmasq
+# killall dnsmasq
 
 echo "############  Sua file cau hinh METADATA AGENT ############"
 sleep 7 
@@ -212,12 +207,12 @@ touch $netmetadata
 
 cat << EOF >> $netmetadata
 [DEFAULT]
-auth_url = http://controller:5000/v2.0
-auth_region = regionOne
+auth_url = http://$CON_ADMIN_IP:5000/v2.0
+auth_region = $REGIONNAME
 admin_tenant_name = service
 admin_user = neutron
-admin_password = $ADMIN_PASS
-nova_metadata_ip = controller
+admin_password = $NEUTRON_PASS
+nova_metadata_ip = $CON_ADMIN_IP
 metadata_proxy_shared_secret = $METADATA_SECRET
 verbose = True
 EOF
@@ -293,7 +288,7 @@ EOF
 #ipsec_status_check_interval=60
 #EOF
 
-echo "############  Khoi dong lai OpenvSwitch ############"
+echo "############  Khoi dong lai OpenvSwitch lan 1 ############"
 sleep 7
 
 service openvswitch-switch restart
@@ -304,6 +299,7 @@ service neutron-metadata-agent restart
 service neutron-lbaas-agent restart
 #service neutron-vpn-agent restart
 
+echo "############  Khoi dong lai OpenvSwitch lan 2 ############"
 sleep 15
 service openvswitch-switch restart
 service neutron-plugin-openvswitch-agent restart
@@ -339,7 +335,7 @@ sleep 5
 echo "export OS_USERNAME=admin" > admin-openrc.sh
 echo "export OS_PASSWORD=$ADMIN_PASS" >> admin-openrc.sh
 echo "export OS_TENANT_NAME=admin" >> admin-openrc.sh
-echo "export OS_AUTH_URL=http://controller:35357/v2.0" >> admin-openrc.sh
+echo "export OS_AUTH_URL=http://$CON_ADMIN_IP:35357/v2.0" >> admin-openrc.sh
 
 echo "############ kiem tra cac agent ############ "
 sleep 1 

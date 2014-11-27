@@ -18,7 +18,7 @@ touch $fileglanceapicontrol
 cat << EOF > $fileglanceapicontrol
 [DEFAULT]
 rpc_backend = rabbit
-rabbit_host = controller
+rabbit_host = $CON_ADMIN_IP
 rabbit_password = $RABBIT_PASS
 default_store = file
 bind_host = 0.0.0.0
@@ -73,16 +73,16 @@ scrub_time = 43200
 scrubber_datadir = /var/lib/glance/scrubber
 image_cache_dir = /var/lib/glance/image-cache/
 [database]
-connection = mysql://glance:$ADMIN_PASS@controller/glance
+connection = mysql://glance:$GLANCE_DBPASS@$CON_ADMIN_IP/glance
 backend = sqlalchemy
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = glance
-admin_password = $ADMIN_PASS
+admin_password = $GLANCE_PASS
 [paste_deploy]
 flavor = keystone
 [store_type_location_strategy]
@@ -107,16 +107,16 @@ backlog = 4096
 api_limit_max = 1000
 limit_param_default = 25
 [database]
-connection = mysql://glance:$ADMIN_PASS@controller/glance
+connection = mysql://glance:$GLANCE_DBPASS@$CON_ADMIN_IP/glance
 backend = sqlalchemy
 [keystone_authtoken]
-auth_uri = http://controller:5000
-auth_host = controller
+auth_uri = http://$CON_ADMIN_IP:5000
+auth_host = $CON_ADMIN_IP
 auth_port = 35357
 auth_protocol = http
 admin_tenant_name = service
 admin_user = glance
-admin_password = $ADMIN_PASS
+admin_password = $GLANCE_PASS
 [paste_deploy]
 flavor = keystone
 EOF
@@ -141,11 +141,14 @@ sleep 7
 echo "########## ADD THEM IMAGE CHO GLANCE ##########"
 mkdir images
 cd images/
-wget http://cdn.download.cirros-cloud.net/0.3.2/cirros-0.3.2-x86_64-disk.img
-glance image-create --name "cirros-0.3.2-x86_64" --disk-format qcow2 \
---container-format bare --is-public True --progress < cirros-0.3.2-x86_64-disk.img
+wget http://download.cirros-cloud.net/0.3.3/cirros-0.3.3-x86_64-disk.img
+glance image-create --name "cirros-0.3.3-x86_64" --disk-format qcow2 \
+--container-format bare --is-public True --progress < cirros-0.3.3-x86_64-disk.img
 cd /root/
 
 sleep 7
 echo "########## Kiem tra lai image vua them vao GLANCE ##########"
 glance image-list
+
+echo -e "\e[92m Thuc thi lenh duoi \e[0m"
+echo -e "\e[92m bash control-7.nova.sh  \e[0m"
